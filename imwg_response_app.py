@@ -365,7 +365,12 @@ st.sidebar.markdown("**👨‍⚕️ Investigador Principal**")
 nombre_ip = st.sidebar.text_input("Nombre del IP:", key="nombre_ip", placeholder="Dr. Juan Pérez")
 
 st.sidebar.divider()
-uploaded = st.sidebar.file_uploader("Subir CSV (opcional)", type=["csv"])
+uploaded = st.sidebar.file_uploader(
+    "Subir CSV (opcional)",
+    type=["csv"],
+    key=f"uploaded_csv_{codigo_paciente}",
+    help="Este archivo se aplica solo al paciente seleccionado."
+)
 
 st.sidebar.divider()
 st.sidebar.markdown("**❓ ¿Paciente con EMD?**")
