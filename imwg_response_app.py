@@ -659,7 +659,7 @@ with col3:
     )
 
 with col4:
-    if st.button("� Generar Informe PDF", type="secondary"):
+    if st.button("  Generar Informe PDF", type="secondary"):
         st.session_state.mostrar_impresion = True
 
 # Mostrar ventana de impresión si está activa
