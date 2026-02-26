@@ -8,4 +8,8 @@ __pycache__/
 venv/
 .streamlit/secrets.toml
 
+# Persistir datos de pacientes en despliegue cloud
+data_pacientes/informe_*.html
+
+
 
