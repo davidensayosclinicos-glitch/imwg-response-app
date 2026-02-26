@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "criterio": "4"
+  },
+  "datos": [
+    {
+      "Fecha": "",
+      "Timepoint": "Screening",
+      "Inmunoglobulinas": "30.81",
+      "Proteina_M_suero": "23.4",
+      "IFE_suero": "IgG Lambda",
+      "IFE_orina": "",
+      "Cadenas_kappa": "12.74",
+      "Cadenas_lambda": "1260.69",
+      "FLC_ratio": "0.01",
+      "Proteina_orina": "",
+      "BMPC_pct": "",
+      "Citometria_MO": "",
+      "Cambio_tamano_pct": "",
+      "Evaluacion_respuesta_IMWG": "",
+      "Iniciales_investigador": "LUI"
+    },
+    {
+      "Fecha": "03/12/2025",
+      "Timepoint": "C1D1",
+      "Inmunoglobulinas": "32.50",
+      "Proteina_M_suero": "24.4",
+      "IFE_suero": "IgG Lambda",
+      "IFE_orina": "",
+      "Cadenas_kappa": "10.79",
+      "Cadenas_lambda": "1017.97",
+      "FLC_ratio": "0.01",
+      "Proteina_orina": "343.64",
+      "BMPC_pct": "",
+      "Citometria_MO": "",
+      "Cambio_tamano_pct": "",
+      "Evaluacion_respuesta_IMWG": "",
+      "Iniciales_investigador": "LUI"
+    },
+    {
+      "Fecha": "30/12/2025",
+      "Timepoint": "Week 5",
+      "Inmunoglobulinas": "8.59",
+      "Proteina_M_suero": "6.3",
+      "IFE_suero": "IgG Lambda",
+      "IFE_orina": "",
+      "Cadenas_kappa": "6.88",
+      "Cadenas_lambda": "45.32",
+      "FLC_ratio": "0.15",
+      "Proteina_orina": "0",
+      "BMPC_pct": "",
+      "Citometria_MO": "",
+      "Cambio_tamano_pct": "",
+      "Evaluacion_respuesta_IMWG": "RP",
+      "Iniciales_investigador": "LUI"
+    },
+    {
+      "Fecha": "29/01/2026",
+      "Timepoint": "Week 9",
+      "Inmunoglobulinas": "4.04",
+      "Proteina_M_suero": "2.4",
+      "IFE_suero": "IgG Lambda",
+      "IFE_orina": "",
+      "Cadenas_kappa": "3.48",
+      "Cadenas_lambda": "21.79",
+      "FLC_ratio": "0.16",
+      "Proteina_orina": "0",
+      "BMPC_pct": null,
+      "Citometria_MO": null,
+      "Cambio_tamano_pct": null,
+      "Evaluacion_respuesta_IMWG": "VGPR",
+      "Iniciales_investigador": null
+    }
+  ]
+}
