@@ -354,7 +354,7 @@ criterio_seleccionado = st.sidebar.radio(
     "Selecciona el criterio reportado para este paciente:",
     options=list(CRITERIOS_INFO.keys()),
     format_func=lambda x: f"{CRITERIOS_INFO[x]['nombre']}",
-    key="criterio_selector",
+    key=f"criterio_selector_{codigo_paciente}",
     index=int(criterio_default) - 1
 )
 
@@ -626,7 +626,7 @@ edited = st.data_editor(
             help="Campo calculado automáticamente"
         )
     },
-    key="data_editor"
+    key=f"data_editor_{codigo_paciente}"
 )
 
 # Action buttons
