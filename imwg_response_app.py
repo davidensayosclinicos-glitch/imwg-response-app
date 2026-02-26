@@ -342,6 +342,13 @@ st.sidebar.markdown("**👤 Código de Paciente**")
 codigos_disponibles = [f"{i:06d}" for i in range(601, 609)]
 codigo_paciente = st.sidebar.selectbox("Seleccionar paciente:", options=codigos_disponibles, key="codigo_paciente")
 
+# Forzar recarga limpia al cambiar paciente
+if "paciente_actual" not in st.session_state:
+    st.session_state.paciente_actual = codigo_paciente
+elif st.session_state.paciente_actual != codigo_paciente:
+    st.session_state.paciente_actual = codigo_paciente
+    st.rerun()
+
 st.sidebar.divider()
 
 # Cargar datos previos
@@ -395,6 +402,7 @@ elif datos_cargados is not None:
     st.success(f"✅ Datos cargados para paciente {codigo_paciente}")
 else:
     df = normalize_dataframe_schema(pd.DataFrame(default_rows))
+    st.info(f"ℹ️ El paciente {codigo_paciente} no tiene datos guardados en este entorno. Se muestra plantilla vacía.")
 
 # Calculate responses before displaying
 work = df.copy()
@@ -659,7 +667,7 @@ with col3:
     )
 
 with col4:
-    if st.button("  Generar Informe PDF", type="secondary"):
+    if st.button("� Generar Informe PDF", type="secondary"):
         st.session_state.mostrar_impresion = True
 
 # Mostrar ventana de impresión si está activa
