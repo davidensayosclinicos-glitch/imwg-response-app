@@ -33,6 +33,33 @@ st.caption("Calcula la categoría de respuesta según criterios IMWG adaptados a
 # ----------------------------
 DATA_DIR = Path("data_pacientes")
 DATA_DIR.mkdir(exist_ok=True)
+ROOT_DIR = Path(".")
+
+def resolver_archivo_paciente(codigo_paciente):
+    """Busca archivo de paciente tolerando variantes de nombre (con/sin ceros a la izquierda)."""
+    codigo_str = re.sub(r"\D", "", str(codigo_paciente))
+    if not codigo_str:
+        return DATA_DIR / f"paciente_{codigo_paciente}.json"
+
+    candidatos_directos = [
+        DATA_DIR / f"paciente_{codigo_str.zfill(6)}.json",
+        DATA_DIR / f"paciente_{codigo_str}.json",
+        ROOT_DIR / f"paciente_{codigo_str.zfill(6)}.json",
+        ROOT_DIR / f"paciente_{codigo_str}.json",
+    ]
+    for candidato in candidatos_directos:
+        if candidato.exists():
+            return candidato
+
+    # Búsqueda flexible: comparar por valor numérico
+    codigo_num = int(codigo_str)
+    for carpeta in [DATA_DIR, ROOT_DIR]:
+        for archivo in carpeta.glob("paciente_*.json"):
+            m = re.match(r"paciente_(\d+)\.json$", archivo.name)
+            if m and int(m.group(1)) == codigo_num:
+                return archivo
+
+    return candidatos_directos[0]
 
 def normalize_dataframe_schema(dataframe):
     """Asegura columnas estándar y compatibilidad con versiones antiguas."""
@@ -58,7 +85,7 @@ def normalize_dataframe_schema(dataframe):
 
 def guardar_datos_paciente(codigo_paciente, dataframe, criterio):
     """Guarda los datos de un paciente en archivo JSON"""
-    filepath = DATA_DIR / f"paciente_{codigo_paciente}.json"
+    filepath = DATA_DIR / f"paciente_{str(codigo_paciente).zfill(6)}.json"
     normalized_df = normalize_dataframe_schema(dataframe)
     data = normalized_df.to_dict(orient="records")
     metadata = {"criterio": criterio}
@@ -70,7 +97,7 @@ def guardar_datos_paciente(codigo_paciente, dataframe, criterio):
 
 def cargar_datos_paciente(codigo_paciente):
     """Carga los datos de un paciente desde archivo JSON"""
-    filepath = DATA_DIR / f"paciente_{codigo_paciente}.json"
+    filepath = resolver_archivo_paciente(codigo_paciente)
     if filepath.exists():
         with open(filepath, "r", encoding="utf-8") as f:
             save_data = json.load(f)
@@ -402,7 +429,12 @@ elif datos_cargados is not None:
     st.success(f"✅ Datos cargados para paciente {codigo_paciente}")
 else:
     df = normalize_dataframe_schema(pd.DataFrame(default_rows))
+    archivos_online = sorted(
+        {p.name for p in DATA_DIR.glob("paciente_*.json")} |
+        {p.name for p in ROOT_DIR.glob("paciente_*.json")}
+    )
     st.info(f"ℹ️ El paciente {codigo_paciente} no tiene datos guardados en este entorno. Se muestra plantilla vacía.")
+    st.caption(f"Archivos de pacientes detectados online: {len(archivos_online)}")
 
 # Calculate responses before displaying
 work = df.copy()
@@ -1032,3 +1064,4 @@ if st.session_state.get("mostrar_impresion", False):
         """)
 
 st.caption("Desarrollado para evaluación de respuesta en mieloma múltiple según IMWG guidelines")
+
